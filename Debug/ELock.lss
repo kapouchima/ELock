@@ -1,0 +1,1656 @@
+
+ELock.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000008da  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  000008da  0000096e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          000000a4  00800062  00800062  00000970  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000970  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000085  00000000  00000000  0000103c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 000000c0  00000000  00000000  000010c8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000c0d  00000000  00000000  00001188  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000311  00000000  00000000  00001d95  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000005a0  00000000  00000000  000020a6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001c8  00000000  00000000  00002648  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000002fa  00000000  00000000  00002810  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000048d  00000000  00000000  00002b0a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	3c c3       	rjmp	.+1656   	; 0x682 <__vector_4>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	26 c3       	rjmp	.+1612   	; 0x660 <__vector_9>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	ea ed       	ldi	r30, 0xDA	; 218
+  3a:	f8 e0       	ldi	r31, 0x08	; 8
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a2 36       	cpi	r26, 0x62	; 98
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	11 e0       	ldi	r17, 0x01	; 1
+  4a:	a2 e6       	ldi	r26, 0x62	; 98
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a6 30       	cpi	r26, 0x06	; 6
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	b6 d2       	rcall	.+1388   	; 0x5c6 <main>
+  5a:	3d c4       	rjmp	.+2170   	; 0x8d6 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <MotorManager>:
+
+
+
+
+void MotorManager()
+{
+  5e:	cf 93       	push	r28
+  60:	df 93       	push	r29
+	switch(MotorManagerState)
+  62:	80 91 6c 00 	lds	r24, 0x006C
+  66:	83 30       	cpi	r24, 0x03	; 3
+  68:	09 f4       	brne	.+2      	; 0x6c <MotorManager+0xe>
+  6a:	5c c0       	rjmp	.+184    	; 0x124 <MotorManager+0xc6>
+  6c:	84 30       	cpi	r24, 0x04	; 4
+  6e:	28 f4       	brcc	.+10     	; 0x7a <MotorManager+0x1c>
+  70:	81 30       	cpi	r24, 0x01	; 1
+  72:	79 f1       	breq	.+94     	; 0xd2 <MotorManager+0x74>
+  74:	82 30       	cpi	r24, 0x02	; 2
+  76:	e0 f5       	brcc	.+120    	; 0xf0 <MotorManager+0x92>
+  78:	0a c0       	rjmp	.+20     	; 0x8e <MotorManager+0x30>
+  7a:	8b 30       	cpi	r24, 0x0B	; 11
+  7c:	09 f4       	brne	.+2      	; 0x80 <MotorManager+0x22>
+  7e:	72 c0       	rjmp	.+228    	; 0x164 <MotorManager+0x106>
+  80:	8c 30       	cpi	r24, 0x0C	; 12
+  82:	09 f4       	brne	.+2      	; 0x86 <MotorManager+0x28>
+  84:	89 c0       	rjmp	.+274    	; 0x198 <MotorManager+0x13a>
+  86:	8a 30       	cpi	r24, 0x0A	; 10
+  88:	09 f0       	breq	.+2      	; 0x8c <MotorManager+0x2e>
+  8a:	94 c0       	rjmp	.+296    	; 0x1b4 <MotorManager+0x156>
+  8c:	5c c0       	rjmp	.+184    	; 0x146 <MotorManager+0xe8>
+	{
+		case 0:
+			SignalingSystem_ClearSignal(&SigSys,1);SignalingSystem_ClearSignal(&SigSys,2);SignalingSystem_ClearSignal(&SigSys,10);SignalingSystem_ClearSignal(&SigSys,11);
+  8e:	cc eb       	ldi	r28, 0xBC	; 188
+  90:	d0 e0       	ldi	r29, 0x00	; 0
+  92:	ce 01       	movw	r24, r28
+  94:	61 e0       	ldi	r22, 0x01	; 1
+  96:	f3 d3       	rcall	.+2022   	; 0x87e <SignalingSystem_ClearSignal>
+  98:	ce 01       	movw	r24, r28
+  9a:	62 e0       	ldi	r22, 0x02	; 2
+  9c:	f0 d3       	rcall	.+2016   	; 0x87e <SignalingSystem_ClearSignal>
+  9e:	ce 01       	movw	r24, r28
+  a0:	6a e0       	ldi	r22, 0x0A	; 10
+  a2:	ed d3       	rcall	.+2010   	; 0x87e <SignalingSystem_ClearSignal>
+  a4:	ce 01       	movw	r24, r28
+  a6:	6b e0       	ldi	r22, 0x0B	; 11
+  a8:	ea d3       	rcall	.+2004   	; 0x87e <SignalingSystem_ClearSignal>
+			if(LockOpenFlag){MotorManagerState=1;LockOpenFlag=0;}
+  aa:	80 91 6f 00 	lds	r24, 0x006F
+  ae:	88 23       	and	r24, r24
+  b0:	29 f0       	breq	.+10     	; 0xbc <MotorManager+0x5e>
+  b2:	81 e0       	ldi	r24, 0x01	; 1
+  b4:	80 93 6c 00 	sts	0x006C, r24
+  b8:	10 92 6f 00 	sts	0x006F, r1
+			if(LockCloseFlag){MotorManagerState=10;LockCloseFlag=0;}
+  bc:	80 91 6e 00 	lds	r24, 0x006E
+  c0:	88 23       	and	r24, r24
+  c2:	09 f4       	brne	.+2      	; 0xc6 <MotorManager+0x68>
+  c4:	77 c0       	rjmp	.+238    	; 0x1b4 <MotorManager+0x156>
+  c6:	8a e0       	ldi	r24, 0x0A	; 10
+  c8:	80 93 6c 00 	sts	0x006C, r24
+  cc:	10 92 6e 00 	sts	0x006E, r1
+  d0:	71 c0       	rjmp	.+226    	; 0x1b4 <MotorManager+0x156>
+			break;
+			
+		case 1:
+			M1Off;M2On;LEDOn;MotorManagerState=2;SignalingSystem_AddSignal(&SigSys,100,10);
+  d2:	93 98       	cbi	0x12, 3	; 18
+  d4:	94 9a       	sbi	0x12, 4	; 18
+  d6:	c5 9a       	sbi	0x18, 5	; 24
+  d8:	82 e0       	ldi	r24, 0x02	; 2
+  da:	80 93 6c 00 	sts	0x006C, r24
+  de:	8c eb       	ldi	r24, 0xBC	; 188
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	44 e6       	ldi	r20, 0x64	; 100
+  e4:	50 e0       	ldi	r21, 0x00	; 0
+  e6:	60 e0       	ldi	r22, 0x00	; 0
+  e8:	70 e0       	ldi	r23, 0x00	; 0
+  ea:	2a e0       	ldi	r18, 0x0A	; 10
+  ec:	66 d3       	rcall	.+1740   	; 0x7ba <SignalingSystem_AddSignal>
+			break;
+  ee:	62 c0       	rjmp	.+196    	; 0x1b4 <MotorManager+0x156>
+			
+		case 2:
+			if(SignalingSystem_CheckSignal(&SigSys,10)){M1Off;M2Off;LEDOff;MotorManagerState=0;}
+  f0:	8c eb       	ldi	r24, 0xBC	; 188
+  f2:	90 e0       	ldi	r25, 0x00	; 0
+  f4:	6a e0       	ldi	r22, 0x0A	; 10
+  f6:	70 e0       	ldi	r23, 0x00	; 0
+  f8:	d5 d2       	rcall	.+1450   	; 0x6a4 <SignalingSystem_CheckSignal>
+  fa:	00 97       	sbiw	r24, 0x00	; 0
+  fc:	29 f0       	breq	.+10     	; 0x108 <MotorManager+0xaa>
+  fe:	93 98       	cbi	0x12, 3	; 18
+ 100:	94 98       	cbi	0x12, 4	; 18
+ 102:	c5 98       	cbi	0x18, 5	; 24
+ 104:	10 92 6c 00 	sts	0x006C, r1
+			if(!Opto){MotorManagerState=3;SignalingSystem_AddSignal(&SigSys,17,1);}
+ 108:	b2 99       	sbic	0x16, 2	; 22
+ 10a:	54 c0       	rjmp	.+168    	; 0x1b4 <MotorManager+0x156>
+ 10c:	83 e0       	ldi	r24, 0x03	; 3
+ 10e:	80 93 6c 00 	sts	0x006C, r24
+ 112:	8c eb       	ldi	r24, 0xBC	; 188
+ 114:	90 e0       	ldi	r25, 0x00	; 0
+ 116:	41 e1       	ldi	r20, 0x11	; 17
+ 118:	50 e0       	ldi	r21, 0x00	; 0
+ 11a:	60 e0       	ldi	r22, 0x00	; 0
+ 11c:	70 e0       	ldi	r23, 0x00	; 0
+ 11e:	21 e0       	ldi	r18, 0x01	; 1
+ 120:	4c d3       	rcall	.+1688   	; 0x7ba <SignalingSystem_AddSignal>
+ 122:	48 c0       	rjmp	.+144    	; 0x1b4 <MotorManager+0x156>
+			break;
+		
+		case 3:
+			if(SignalingSystem_CheckSignal(&SigSys,1)){M1Off;M2Off;LEDOff;LockState=Close;MotorManagerState=0;}
+ 124:	8c eb       	ldi	r24, 0xBC	; 188
+ 126:	90 e0       	ldi	r25, 0x00	; 0
+ 128:	61 e0       	ldi	r22, 0x01	; 1
+ 12a:	70 e0       	ldi	r23, 0x00	; 0
+ 12c:	bb d2       	rcall	.+1398   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 12e:	00 97       	sbiw	r24, 0x00	; 0
+ 130:	09 f4       	brne	.+2      	; 0x134 <MotorManager+0xd6>
+ 132:	40 c0       	rjmp	.+128    	; 0x1b4 <MotorManager+0x156>
+ 134:	93 98       	cbi	0x12, 3	; 18
+ 136:	94 98       	cbi	0x12, 4	; 18
+ 138:	c5 98       	cbi	0x18, 5	; 24
+ 13a:	81 e0       	ldi	r24, 0x01	; 1
+ 13c:	80 93 6d 00 	sts	0x006D, r24
+ 140:	10 92 6c 00 	sts	0x006C, r1
+ 144:	37 c0       	rjmp	.+110    	; 0x1b4 <MotorManager+0x156>
+			break;
+			
+		case 10:
+			M2Off;M1On;LEDOn;MotorManagerState=11;SignalingSystem_AddSignal(&SigSys,100,11);
+ 146:	94 98       	cbi	0x12, 4	; 18
+ 148:	93 9a       	sbi	0x12, 3	; 18
+ 14a:	c5 9a       	sbi	0x18, 5	; 24
+ 14c:	8b e0       	ldi	r24, 0x0B	; 11
+ 14e:	80 93 6c 00 	sts	0x006C, r24
+ 152:	8c eb       	ldi	r24, 0xBC	; 188
+ 154:	90 e0       	ldi	r25, 0x00	; 0
+ 156:	44 e6       	ldi	r20, 0x64	; 100
+ 158:	50 e0       	ldi	r21, 0x00	; 0
+ 15a:	60 e0       	ldi	r22, 0x00	; 0
+ 15c:	70 e0       	ldi	r23, 0x00	; 0
+ 15e:	2b e0       	ldi	r18, 0x0B	; 11
+ 160:	2c d3       	rcall	.+1624   	; 0x7ba <SignalingSystem_AddSignal>
+			break;
+ 162:	28 c0       	rjmp	.+80     	; 0x1b4 <MotorManager+0x156>
+		
+		case 11:
+			if(SignalingSystem_CheckSignal(&SigSys,11)){M1Off;M2Off;LEDOff;MotorManagerState=0;}
+ 164:	8c eb       	ldi	r24, 0xBC	; 188
+ 166:	90 e0       	ldi	r25, 0x00	; 0
+ 168:	6b e0       	ldi	r22, 0x0B	; 11
+ 16a:	70 e0       	ldi	r23, 0x00	; 0
+ 16c:	9b d2       	rcall	.+1334   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 16e:	00 97       	sbiw	r24, 0x00	; 0
+ 170:	29 f0       	breq	.+10     	; 0x17c <MotorManager+0x11e>
+ 172:	93 98       	cbi	0x12, 3	; 18
+ 174:	94 98       	cbi	0x12, 4	; 18
+ 176:	c5 98       	cbi	0x18, 5	; 24
+ 178:	10 92 6c 00 	sts	0x006C, r1
+			if(Opto){MotorManagerState=12;SignalingSystem_AddSignal(&SigSys,15,2);}
+ 17c:	b2 9b       	sbis	0x16, 2	; 22
+ 17e:	1a c0       	rjmp	.+52     	; 0x1b4 <MotorManager+0x156>
+ 180:	8c e0       	ldi	r24, 0x0C	; 12
+ 182:	80 93 6c 00 	sts	0x006C, r24
+ 186:	8c eb       	ldi	r24, 0xBC	; 188
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	4f e0       	ldi	r20, 0x0F	; 15
+ 18c:	50 e0       	ldi	r21, 0x00	; 0
+ 18e:	60 e0       	ldi	r22, 0x00	; 0
+ 190:	70 e0       	ldi	r23, 0x00	; 0
+ 192:	22 e0       	ldi	r18, 0x02	; 2
+ 194:	12 d3       	rcall	.+1572   	; 0x7ba <SignalingSystem_AddSignal>
+ 196:	0e c0       	rjmp	.+28     	; 0x1b4 <MotorManager+0x156>
+			break;
+	
+		case 12:
+			if(SignalingSystem_CheckSignal(&SigSys,2)){M1Off;M2Off;LEDOff;LockState=Open;MotorManagerState=0;}
+ 198:	8c eb       	ldi	r24, 0xBC	; 188
+ 19a:	90 e0       	ldi	r25, 0x00	; 0
+ 19c:	62 e0       	ldi	r22, 0x02	; 2
+ 19e:	70 e0       	ldi	r23, 0x00	; 0
+ 1a0:	81 d2       	rcall	.+1282   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 1a2:	00 97       	sbiw	r24, 0x00	; 0
+ 1a4:	39 f0       	breq	.+14     	; 0x1b4 <MotorManager+0x156>
+ 1a6:	93 98       	cbi	0x12, 3	; 18
+ 1a8:	94 98       	cbi	0x12, 4	; 18
+ 1aa:	c5 98       	cbi	0x18, 5	; 24
+ 1ac:	10 92 6d 00 	sts	0x006D, r1
+ 1b0:	10 92 6c 00 	sts	0x006C, r1
+			break;
+		    
+	}
+}
+ 1b4:	df 91       	pop	r29
+ 1b6:	cf 91       	pop	r28
+ 1b8:	08 95       	ret
+
+000001ba <Send_Task>:
+
+
+
+void Send_Task()
+{
+	if(SendFlag)
+ 1ba:	80 91 67 00 	lds	r24, 0x0067
+ 1be:	88 23       	and	r24, r24
+ 1c0:	31 f0       	breq	.+12     	; 0x1ce <Send_Task+0x14>
+		{SendState=0;SendFlag=0;ReceiveEnable=0;}
+ 1c2:	10 92 60 00 	sts	0x0060, r1
+ 1c6:	10 92 67 00 	sts	0x0067, r1
+ 1ca:	10 92 61 00 	sts	0x0061, r1
+			
+	switch(SendState)
+ 1ce:	80 91 60 00 	lds	r24, 0x0060
+ 1d2:	82 30       	cpi	r24, 0x02	; 2
+ 1d4:	89 f1       	breq	.+98     	; 0x238 <Send_Task+0x7e>
+ 1d6:	83 30       	cpi	r24, 0x03	; 3
+ 1d8:	30 f4       	brcc	.+12     	; 0x1e6 <Send_Task+0x2c>
+ 1da:	88 23       	and	r24, r24
+ 1dc:	59 f0       	breq	.+22     	; 0x1f4 <Send_Task+0x3a>
+ 1de:	81 30       	cpi	r24, 0x01	; 1
+ 1e0:	09 f0       	breq	.+2      	; 0x1e4 <Send_Task+0x2a>
+ 1e2:	6c c0       	rjmp	.+216    	; 0x2bc <Send_Task+0x102>
+ 1e4:	14 c0       	rjmp	.+40     	; 0x20e <Send_Task+0x54>
+ 1e6:	83 30       	cpi	r24, 0x03	; 3
+ 1e8:	09 f4       	brne	.+2      	; 0x1ec <Send_Task+0x32>
+ 1ea:	40 c0       	rjmp	.+128    	; 0x26c <Send_Task+0xb2>
+ 1ec:	84 30       	cpi	r24, 0x04	; 4
+ 1ee:	09 f0       	breq	.+2      	; 0x1f2 <Send_Task+0x38>
+ 1f0:	65 c0       	rjmp	.+202    	; 0x2bc <Send_Task+0x102>
+ 1f2:	56 c0       	rjmp	.+172    	; 0x2a0 <Send_Task+0xe6>
+	{
+		case 0: 
+		DataOutOn;SignalingSystem_AddSignal(&SigSysData,10,1);SendState=1;
+ 1f4:	96 9a       	sbi	0x12, 6	; 18
+ 1f6:	82 e7       	ldi	r24, 0x72	; 114
+ 1f8:	90 e0       	ldi	r25, 0x00	; 0
+ 1fa:	4a e0       	ldi	r20, 0x0A	; 10
+ 1fc:	50 e0       	ldi	r21, 0x00	; 0
+ 1fe:	60 e0       	ldi	r22, 0x00	; 0
+ 200:	70 e0       	ldi	r23, 0x00	; 0
+ 202:	21 e0       	ldi	r18, 0x01	; 1
+ 204:	da d2       	rcall	.+1460   	; 0x7ba <SignalingSystem_AddSignal>
+ 206:	81 e0       	ldi	r24, 0x01	; 1
+ 208:	80 93 60 00 	sts	0x0060, r24
+			break;
+ 20c:	08 95       	ret
+			
+		case 1: if(SignalingSystem_CheckSignal(&SigSysData,1)){DataOutOff;SignalingSystem_AddSignal(&SigSysData,10,2);SendState=2;}
+ 20e:	82 e7       	ldi	r24, 0x72	; 114
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	61 e0       	ldi	r22, 0x01	; 1
+ 214:	70 e0       	ldi	r23, 0x00	; 0
+ 216:	46 d2       	rcall	.+1164   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 218:	00 97       	sbiw	r24, 0x00	; 0
+ 21a:	09 f4       	brne	.+2      	; 0x21e <Send_Task+0x64>
+ 21c:	4f c0       	rjmp	.+158    	; 0x2bc <Send_Task+0x102>
+ 21e:	96 98       	cbi	0x12, 6	; 18
+ 220:	82 e7       	ldi	r24, 0x72	; 114
+ 222:	90 e0       	ldi	r25, 0x00	; 0
+ 224:	4a e0       	ldi	r20, 0x0A	; 10
+ 226:	50 e0       	ldi	r21, 0x00	; 0
+ 228:	60 e0       	ldi	r22, 0x00	; 0
+ 22a:	70 e0       	ldi	r23, 0x00	; 0
+ 22c:	22 e0       	ldi	r18, 0x02	; 2
+ 22e:	c5 d2       	rcall	.+1418   	; 0x7ba <SignalingSystem_AddSignal>
+ 230:	82 e0       	ldi	r24, 0x02	; 2
+ 232:	80 93 60 00 	sts	0x0060, r24
+ 236:	08 95       	ret
+			break;
+			
+		case 2: if(SignalingSystem_CheckSignal(&SigSysData,2)){if(SendData&0b10){DataOutOff;}else{DataOutOn;}SignalingSystem_AddSignal(&SigSysData,10,3);SendState=3;}
+ 238:	82 e7       	ldi	r24, 0x72	; 114
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	62 e0       	ldi	r22, 0x02	; 2
+ 23e:	70 e0       	ldi	r23, 0x00	; 0
+ 240:	31 d2       	rcall	.+1122   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 242:	00 97       	sbiw	r24, 0x00	; 0
+ 244:	d9 f1       	breq	.+118    	; 0x2bc <Send_Task+0x102>
+ 246:	80 91 66 00 	lds	r24, 0x0066
+ 24a:	81 ff       	sbrs	r24, 1
+ 24c:	02 c0       	rjmp	.+4      	; 0x252 <Send_Task+0x98>
+ 24e:	96 98       	cbi	0x12, 6	; 18
+ 250:	01 c0       	rjmp	.+2      	; 0x254 <Send_Task+0x9a>
+ 252:	96 9a       	sbi	0x12, 6	; 18
+ 254:	82 e7       	ldi	r24, 0x72	; 114
+ 256:	90 e0       	ldi	r25, 0x00	; 0
+ 258:	4a e0       	ldi	r20, 0x0A	; 10
+ 25a:	50 e0       	ldi	r21, 0x00	; 0
+ 25c:	60 e0       	ldi	r22, 0x00	; 0
+ 25e:	70 e0       	ldi	r23, 0x00	; 0
+ 260:	23 e0       	ldi	r18, 0x03	; 3
+ 262:	ab d2       	rcall	.+1366   	; 0x7ba <SignalingSystem_AddSignal>
+ 264:	83 e0       	ldi	r24, 0x03	; 3
+ 266:	80 93 60 00 	sts	0x0060, r24
+ 26a:	08 95       	ret
+			break;
+			
+		case 3: if(SignalingSystem_CheckSignal(&SigSysData,3)){if(SendData&0b01){DataOutOff;}else{DataOutOn;}SignalingSystem_AddSignal(&SigSysData,10,4);SendState=4;}
+ 26c:	82 e7       	ldi	r24, 0x72	; 114
+ 26e:	90 e0       	ldi	r25, 0x00	; 0
+ 270:	63 e0       	ldi	r22, 0x03	; 3
+ 272:	70 e0       	ldi	r23, 0x00	; 0
+ 274:	17 d2       	rcall	.+1070   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 276:	00 97       	sbiw	r24, 0x00	; 0
+ 278:	09 f1       	breq	.+66     	; 0x2bc <Send_Task+0x102>
+ 27a:	80 91 66 00 	lds	r24, 0x0066
+ 27e:	80 ff       	sbrs	r24, 0
+ 280:	02 c0       	rjmp	.+4      	; 0x286 <Send_Task+0xcc>
+ 282:	96 98       	cbi	0x12, 6	; 18
+ 284:	01 c0       	rjmp	.+2      	; 0x288 <Send_Task+0xce>
+ 286:	96 9a       	sbi	0x12, 6	; 18
+ 288:	82 e7       	ldi	r24, 0x72	; 114
+ 28a:	90 e0       	ldi	r25, 0x00	; 0
+ 28c:	4a e0       	ldi	r20, 0x0A	; 10
+ 28e:	50 e0       	ldi	r21, 0x00	; 0
+ 290:	60 e0       	ldi	r22, 0x00	; 0
+ 292:	70 e0       	ldi	r23, 0x00	; 0
+ 294:	24 e0       	ldi	r18, 0x04	; 4
+ 296:	91 d2       	rcall	.+1314   	; 0x7ba <SignalingSystem_AddSignal>
+ 298:	84 e0       	ldi	r24, 0x04	; 4
+ 29a:	80 93 60 00 	sts	0x0060, r24
+ 29e:	08 95       	ret
+			break;
+			
+		case 4: if(SignalingSystem_CheckSignal(&SigSysData,4)){DataOutOff;SendState=10;ReceiveEnable=1;}
+ 2a0:	82 e7       	ldi	r24, 0x72	; 114
+ 2a2:	90 e0       	ldi	r25, 0x00	; 0
+ 2a4:	64 e0       	ldi	r22, 0x04	; 4
+ 2a6:	70 e0       	ldi	r23, 0x00	; 0
+ 2a8:	fd d1       	rcall	.+1018   	; 0x6a4 <SignalingSystem_CheckSignal>
+ 2aa:	00 97       	sbiw	r24, 0x00	; 0
+ 2ac:	39 f0       	breq	.+14     	; 0x2bc <Send_Task+0x102>
+ 2ae:	96 98       	cbi	0x12, 6	; 18
+ 2b0:	8a e0       	ldi	r24, 0x0A	; 10
+ 2b2:	80 93 60 00 	sts	0x0060, r24
+ 2b6:	81 e0       	ldi	r24, 0x01	; 1
+ 2b8:	80 93 61 00 	sts	0x0061, r24
+ 2bc:	08 95       	ret
+
+000002be <Receive_Task>:
+
+
+void Receive_Task()
+{
+	static char dat;
+	if(ReceiveEnable)
+ 2be:	80 91 61 00 	lds	r24, 0x0061
+ 2c2:	88 23       	and	r24, r24
+ 2c4:	09 f4       	brne	.+2      	; 0x2c8 <Receive_Task+0xa>
+ 2c6:	9c c0       	rjmp	.+312    	; 0x400 <Receive_Task+0x142>
+	{
+		switch(ReceiveState)
+ 2c8:	80 91 68 00 	lds	r24, 0x0068
+ 2cc:	82 30       	cpi	r24, 0x02	; 2
+ 2ce:	d9 f1       	breq	.+118    	; 0x346 <Receive_Task+0x88>
+ 2d0:	83 30       	cpi	r24, 0x03	; 3
+ 2d2:	30 f4       	brcc	.+12     	; 0x2e0 <Receive_Task+0x22>
+ 2d4:	88 23       	and	r24, r24
+ 2d6:	71 f0       	breq	.+28     	; 0x2f4 <Receive_Task+0x36>
+ 2d8:	81 30       	cpi	r24, 0x01	; 1
+ 2da:	09 f0       	breq	.+2      	; 0x2de <Receive_Task+0x20>
+ 2dc:	91 c0       	rjmp	.+290    	; 0x400 <Receive_Task+0x142>
+ 2de:	1a c0       	rjmp	.+52     	; 0x314 <Receive_Task+0x56>
+ 2e0:	84 30       	cpi	r24, 0x04	; 4
+ 2e2:	09 f4       	brne	.+2      	; 0x2e6 <Receive_Task+0x28>
+ 2e4:	63 c0       	rjmp	.+198    	; 0x3ac <Receive_Task+0xee>
+ 2e6:	84 30       	cpi	r24, 0x04	; 4
+ 2e8:	08 f4       	brcc	.+2      	; 0x2ec <Receive_Task+0x2e>
+ 2ea:	46 c0       	rjmp	.+140    	; 0x378 <Receive_Task+0xba>
+ 2ec:	85 30       	cpi	r24, 0x05	; 5
+ 2ee:	09 f0       	breq	.+2      	; 0x2f2 <Receive_Task+0x34>
+ 2f0:	87 c0       	rjmp	.+270    	; 0x400 <Receive_Task+0x142>
+ 2f2:	76 c0       	rjmp	.+236    	; 0x3e0 <Receive_Task+0x122>
+		{
+			case 0: if(!DataIn){SignalingSystem_AddSignal(&SigSysData,4,200);dat=0;ReceiveState=1;}
+ 2f4:	85 99       	sbic	0x10, 5	; 16
+ 2f6:	84 c0       	rjmp	.+264    	; 0x400 <Receive_Task+0x142>
+ 2f8:	82 e7       	ldi	r24, 0x72	; 114
+ 2fa:	90 e0       	ldi	r25, 0x00	; 0
+ 2fc:	44 e0       	ldi	r20, 0x04	; 4
+ 2fe:	50 e0       	ldi	r21, 0x00	; 0
+ 300:	60 e0       	ldi	r22, 0x00	; 0
+ 302:	70 e0       	ldi	r23, 0x00	; 0
+ 304:	28 ec       	ldi	r18, 0xC8	; 200
+ 306:	59 d2       	rcall	.+1202   	; 0x7ba <SignalingSystem_AddSignal>
+ 308:	10 92 71 00 	sts	0x0071, r1
+ 30c:	81 e0       	ldi	r24, 0x01	; 1
+ 30e:	80 93 68 00 	sts	0x0068, r24
+ 312:	08 95       	ret
+				break;
+				
+			case 1: if(SignalingSystem_CheckSignal(&SigSysData,200))if(!DataIn){SignalingSystem_AddSignal(&SigSysData,10,201);ReceiveState=2;}else{ReceiveState=0;}
+ 314:	82 e7       	ldi	r24, 0x72	; 114
+ 316:	90 e0       	ldi	r25, 0x00	; 0
+ 318:	68 ec       	ldi	r22, 0xC8	; 200
+ 31a:	70 e0       	ldi	r23, 0x00	; 0
+ 31c:	c3 d1       	rcall	.+902    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 31e:	00 97       	sbiw	r24, 0x00	; 0
+ 320:	09 f4       	brne	.+2      	; 0x324 <Receive_Task+0x66>
+ 322:	6e c0       	rjmp	.+220    	; 0x400 <Receive_Task+0x142>
+ 324:	85 99       	sbic	0x10, 5	; 16
+ 326:	0c c0       	rjmp	.+24     	; 0x340 <Receive_Task+0x82>
+ 328:	82 e7       	ldi	r24, 0x72	; 114
+ 32a:	90 e0       	ldi	r25, 0x00	; 0
+ 32c:	4a e0       	ldi	r20, 0x0A	; 10
+ 32e:	50 e0       	ldi	r21, 0x00	; 0
+ 330:	60 e0       	ldi	r22, 0x00	; 0
+ 332:	70 e0       	ldi	r23, 0x00	; 0
+ 334:	29 ec       	ldi	r18, 0xC9	; 201
+ 336:	41 d2       	rcall	.+1154   	; 0x7ba <SignalingSystem_AddSignal>
+ 338:	82 e0       	ldi	r24, 0x02	; 2
+ 33a:	80 93 68 00 	sts	0x0068, r24
+ 33e:	08 95       	ret
+ 340:	10 92 68 00 	sts	0x0068, r1
+ 344:	08 95       	ret
+				break;
+				
+			case 2: if(SignalingSystem_CheckSignal(&SigSysData,201))if(DataIn){SignalingSystem_AddSignal(&SigSysData,10,202);ReceiveState=3;}else{ReceiveState=0;}
+ 346:	82 e7       	ldi	r24, 0x72	; 114
+ 348:	90 e0       	ldi	r25, 0x00	; 0
+ 34a:	69 ec       	ldi	r22, 0xC9	; 201
+ 34c:	70 e0       	ldi	r23, 0x00	; 0
+ 34e:	aa d1       	rcall	.+852    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 350:	00 97       	sbiw	r24, 0x00	; 0
+ 352:	09 f4       	brne	.+2      	; 0x356 <Receive_Task+0x98>
+ 354:	55 c0       	rjmp	.+170    	; 0x400 <Receive_Task+0x142>
+ 356:	85 9b       	sbis	0x10, 5	; 16
+ 358:	0c c0       	rjmp	.+24     	; 0x372 <Receive_Task+0xb4>
+ 35a:	82 e7       	ldi	r24, 0x72	; 114
+ 35c:	90 e0       	ldi	r25, 0x00	; 0
+ 35e:	4a e0       	ldi	r20, 0x0A	; 10
+ 360:	50 e0       	ldi	r21, 0x00	; 0
+ 362:	60 e0       	ldi	r22, 0x00	; 0
+ 364:	70 e0       	ldi	r23, 0x00	; 0
+ 366:	2a ec       	ldi	r18, 0xCA	; 202
+ 368:	28 d2       	rcall	.+1104   	; 0x7ba <SignalingSystem_AddSignal>
+ 36a:	83 e0       	ldi	r24, 0x03	; 3
+ 36c:	80 93 68 00 	sts	0x0068, r24
+ 370:	08 95       	ret
+ 372:	10 92 68 00 	sts	0x0068, r1
+ 376:	08 95       	ret
+				break;
+			
+			case 3: if(SignalingSystem_CheckSignal(&SigSysData,202)){if(DataIn)dat|=0b10;SignalingSystem_AddSignal(&SigSysData,10,203);ReceiveState=4;}
+ 378:	82 e7       	ldi	r24, 0x72	; 114
+ 37a:	90 e0       	ldi	r25, 0x00	; 0
+ 37c:	6a ec       	ldi	r22, 0xCA	; 202
+ 37e:	70 e0       	ldi	r23, 0x00	; 0
+ 380:	91 d1       	rcall	.+802    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 382:	00 97       	sbiw	r24, 0x00	; 0
+ 384:	e9 f1       	breq	.+122    	; 0x400 <Receive_Task+0x142>
+ 386:	85 9b       	sbis	0x10, 5	; 16
+ 388:	05 c0       	rjmp	.+10     	; 0x394 <Receive_Task+0xd6>
+ 38a:	80 91 71 00 	lds	r24, 0x0071
+ 38e:	82 60       	ori	r24, 0x02	; 2
+ 390:	80 93 71 00 	sts	0x0071, r24
+ 394:	82 e7       	ldi	r24, 0x72	; 114
+ 396:	90 e0       	ldi	r25, 0x00	; 0
+ 398:	4a e0       	ldi	r20, 0x0A	; 10
+ 39a:	50 e0       	ldi	r21, 0x00	; 0
+ 39c:	60 e0       	ldi	r22, 0x00	; 0
+ 39e:	70 e0       	ldi	r23, 0x00	; 0
+ 3a0:	2b ec       	ldi	r18, 0xCB	; 203
+ 3a2:	0b d2       	rcall	.+1046   	; 0x7ba <SignalingSystem_AddSignal>
+ 3a4:	84 e0       	ldi	r24, 0x04	; 4
+ 3a6:	80 93 68 00 	sts	0x0068, r24
+ 3aa:	08 95       	ret
+				break;
+				
+			case 4: if(SignalingSystem_CheckSignal(&SigSysData,203)){if(DataIn)dat|=0b01;SignalingSystem_AddSignal(&SigSysData,20,204);ReceiveState=5;}
+ 3ac:	82 e7       	ldi	r24, 0x72	; 114
+ 3ae:	90 e0       	ldi	r25, 0x00	; 0
+ 3b0:	6b ec       	ldi	r22, 0xCB	; 203
+ 3b2:	70 e0       	ldi	r23, 0x00	; 0
+ 3b4:	77 d1       	rcall	.+750    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 3b6:	00 97       	sbiw	r24, 0x00	; 0
+ 3b8:	19 f1       	breq	.+70     	; 0x400 <Receive_Task+0x142>
+ 3ba:	85 9b       	sbis	0x10, 5	; 16
+ 3bc:	05 c0       	rjmp	.+10     	; 0x3c8 <Receive_Task+0x10a>
+ 3be:	80 91 71 00 	lds	r24, 0x0071
+ 3c2:	81 60       	ori	r24, 0x01	; 1
+ 3c4:	80 93 71 00 	sts	0x0071, r24
+ 3c8:	82 e7       	ldi	r24, 0x72	; 114
+ 3ca:	90 e0       	ldi	r25, 0x00	; 0
+ 3cc:	44 e1       	ldi	r20, 0x14	; 20
+ 3ce:	50 e0       	ldi	r21, 0x00	; 0
+ 3d0:	60 e0       	ldi	r22, 0x00	; 0
+ 3d2:	70 e0       	ldi	r23, 0x00	; 0
+ 3d4:	2c ec       	ldi	r18, 0xCC	; 204
+ 3d6:	f1 d1       	rcall	.+994    	; 0x7ba <SignalingSystem_AddSignal>
+ 3d8:	85 e0       	ldi	r24, 0x05	; 5
+ 3da:	80 93 68 00 	sts	0x0068, r24
+ 3de:	08 95       	ret
+					break;
+					
+			case 5: if(SignalingSystem_CheckSignal(&SigSysData,204)){ReceiveState=0;ReceiveData=dat;ReceiveFlag=1;}
+ 3e0:	82 e7       	ldi	r24, 0x72	; 114
+ 3e2:	90 e0       	ldi	r25, 0x00	; 0
+ 3e4:	6c ec       	ldi	r22, 0xCC	; 204
+ 3e6:	70 e0       	ldi	r23, 0x00	; 0
+ 3e8:	5d d1       	rcall	.+698    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 3ea:	00 97       	sbiw	r24, 0x00	; 0
+ 3ec:	49 f0       	breq	.+18     	; 0x400 <Receive_Task+0x142>
+ 3ee:	10 92 68 00 	sts	0x0068, r1
+ 3f2:	80 91 71 00 	lds	r24, 0x0071
+ 3f6:	80 93 64 00 	sts	0x0064, r24
+ 3fa:	81 e0       	ldi	r24, 0x01	; 1
+ 3fc:	80 93 65 00 	sts	0x0065, r24
+ 400:	08 95       	ret
+
+00000402 <InterfaceManager>:
+
+
+
+void InterfaceManager()
+{
+	if(ReceiveFlag)
+ 402:	80 91 65 00 	lds	r24, 0x0065
+ 406:	88 23       	and	r24, r24
+ 408:	09 f4       	brne	.+2      	; 0x40c <InterfaceManager+0xa>
+ 40a:	43 c0       	rjmp	.+134    	; 0x492 <__stack+0x33>
+	{
+		
+		if(ReceiveData==0b00)
+ 40c:	80 91 64 00 	lds	r24, 0x0064
+ 410:	88 23       	and	r24, r24
+ 412:	d1 f4       	brne	.+52     	; 0x448 <InterfaceManager+0x46>
+		{
+			//Get State
+			SendData=0;
+ 414:	10 92 66 00 	sts	0x0066, r1
+			if(LockState==Open)
+ 418:	80 91 6d 00 	lds	r24, 0x006D
+ 41c:	88 23       	and	r24, r24
+ 41e:	39 f4       	brne	.+14     	; 0x42e <InterfaceManager+0x2c>
+			{
+				SendData=0b10;
+ 420:	82 e0       	ldi	r24, 0x02	; 2
+ 422:	80 93 66 00 	sts	0x0066, r24
+				SendFlag=1;
+ 426:	81 e0       	ldi	r24, 0x01	; 1
+ 428:	80 93 67 00 	sts	0x0067, r24
+ 42c:	0d c0       	rjmp	.+26     	; 0x448 <InterfaceManager+0x46>
+			}
+			
+			if(LockState==Close)
+ 42e:	81 30       	cpi	r24, 0x01	; 1
+ 430:	59 f4       	brne	.+22     	; 0x448 <InterfaceManager+0x46>
+			{
+				if(Reed2)
+ 432:	b0 9b       	sbis	0x16, 0	; 22
+ 434:	03 c0       	rjmp	.+6      	; 0x43c <InterfaceManager+0x3a>
+					SendData=0b01; //Door is Open
+ 436:	80 93 66 00 	sts	0x0066, r24
+ 43a:	03 c0       	rjmp	.+6      	; 0x442 <InterfaceManager+0x40>
+				else
+					SendData=0b11; //Door is Closed
+ 43c:	83 e0       	ldi	r24, 0x03	; 3
+ 43e:	80 93 66 00 	sts	0x0066, r24
+				SendFlag=1;
+ 442:	81 e0       	ldi	r24, 0x01	; 1
+ 444:	80 93 67 00 	sts	0x0067, r24
+		}
+		
+		
+		
+		
+		if(ReceiveData==0b01)
+ 448:	80 91 64 00 	lds	r24, 0x0064
+ 44c:	81 30       	cpi	r24, 0x01	; 1
+ 44e:	51 f4       	brne	.+20     	; 0x464 <__stack+0x5>
+		{
+			//Close Lock
+			LockCloseFlag=1;
+ 450:	80 93 6e 00 	sts	0x006E, r24
+			SendData=0b11;
+ 454:	93 e0       	ldi	r25, 0x03	; 3
+ 456:	90 93 66 00 	sts	0x0066, r25
+			SendFlag=1;
+ 45a:	80 93 67 00 	sts	0x0067, r24
+			LEDFlag=1;
+ 45e:	80 93 63 00 	sts	0x0063, r24
+ 462:	15 c0       	rjmp	.+42     	; 0x48e <__stack+0x2f>
+		
+		
+		
+		
+		
+		if(ReceiveData==0b10)
+ 464:	82 30       	cpi	r24, 0x02	; 2
+ 466:	61 f4       	brne	.+24     	; 0x480 <__stack+0x21>
+		{
+			//Open Lock
+			LockOpenTempFlag=1;
+ 468:	81 e0       	ldi	r24, 0x01	; 1
+ 46a:	80 93 6b 00 	sts	0x006B, r24
+			SendData=0b11;
+ 46e:	93 e0       	ldi	r25, 0x03	; 3
+ 470:	90 93 66 00 	sts	0x0066, r25
+			SendFlag=1;
+ 474:	80 93 67 00 	sts	0x0067, r24
+			LEDFlag=2;
+ 478:	82 e0       	ldi	r24, 0x02	; 2
+ 47a:	80 93 63 00 	sts	0x0063, r24
+ 47e:	07 c0       	rjmp	.+14     	; 0x48e <__stack+0x2f>
+		
+		
+		
+		
+		
+		if(ReceiveData==0b11)
+ 480:	83 30       	cpi	r24, 0x03	; 3
+ 482:	29 f4       	brne	.+10     	; 0x48e <__stack+0x2f>
+		{
+			//Ping
+			SendData=0b11;
+ 484:	80 93 66 00 	sts	0x0066, r24
+			SendFlag=1;	
+ 488:	81 e0       	ldi	r24, 0x01	; 1
+ 48a:	80 93 67 00 	sts	0x0067, r24
+		}
+		
+		ReceiveFlag=0;
+ 48e:	10 92 65 00 	sts	0x0065, r1
+ 492:	08 95       	ret
+
+00000494 <LEDManager>:
+
+
+
+void LEDManager()
+{
+	switch(LEDState)
+ 494:	80 91 62 00 	lds	r24, 0x0062
+ 498:	8a 30       	cpi	r24, 0x0A	; 10
+ 49a:	09 f4       	brne	.+2      	; 0x49e <LEDManager+0xa>
+ 49c:	52 c0       	rjmp	.+164    	; 0x542 <LEDManager+0xae>
+ 49e:	8b 30       	cpi	r24, 0x0B	; 11
+ 4a0:	30 f4       	brcc	.+12     	; 0x4ae <LEDManager+0x1a>
+ 4a2:	88 23       	and	r24, r24
+ 4a4:	71 f0       	breq	.+28     	; 0x4c2 <LEDManager+0x2e>
+ 4a6:	81 30       	cpi	r24, 0x01	; 1
+ 4a8:	09 f0       	breq	.+2      	; 0x4ac <LEDManager+0x18>
+ 4aa:	8c c0       	rjmp	.+280    	; 0x5c4 <LEDManager+0x130>
+ 4ac:	3c c0       	rjmp	.+120    	; 0x526 <LEDManager+0x92>
+ 4ae:	84 31       	cpi	r24, 0x14	; 20
+ 4b0:	09 f4       	brne	.+2      	; 0x4b4 <LEDManager+0x20>
+ 4b2:	68 c0       	rjmp	.+208    	; 0x584 <LEDManager+0xf0>
+ 4b4:	85 31       	cpi	r24, 0x15	; 21
+ 4b6:	09 f4       	brne	.+2      	; 0x4ba <LEDManager+0x26>
+ 4b8:	79 c0       	rjmp	.+242    	; 0x5ac <LEDManager+0x118>
+ 4ba:	8b 30       	cpi	r24, 0x0B	; 11
+ 4bc:	09 f0       	breq	.+2      	; 0x4c0 <LEDManager+0x2c>
+ 4be:	82 c0       	rjmp	.+260    	; 0x5c4 <LEDManager+0x130>
+ 4c0:	54 c0       	rjmp	.+168    	; 0x56a <LEDManager+0xd6>
+	{
+		case 0: if(LEDFlag==1){LEDOn;SignalingSystem_AddSignal(&SigSys,3,70);LEDState=1;}
+ 4c2:	80 91 63 00 	lds	r24, 0x0063
+ 4c6:	81 30       	cpi	r24, 0x01	; 1
+ 4c8:	61 f4       	brne	.+24     	; 0x4e2 <LEDManager+0x4e>
+ 4ca:	c5 9a       	sbi	0x18, 5	; 24
+ 4cc:	8c eb       	ldi	r24, 0xBC	; 188
+ 4ce:	90 e0       	ldi	r25, 0x00	; 0
+ 4d0:	43 e0       	ldi	r20, 0x03	; 3
+ 4d2:	50 e0       	ldi	r21, 0x00	; 0
+ 4d4:	60 e0       	ldi	r22, 0x00	; 0
+ 4d6:	70 e0       	ldi	r23, 0x00	; 0
+ 4d8:	26 e4       	ldi	r18, 0x46	; 70
+ 4da:	6f d1       	rcall	.+734    	; 0x7ba <SignalingSystem_AddSignal>
+ 4dc:	81 e0       	ldi	r24, 0x01	; 1
+ 4de:	80 93 62 00 	sts	0x0062, r24
+				if(LEDFlag==2){LEDOn;SignalingSystem_AddSignal(&SigSys,3,70);LEDState=10;}
+ 4e2:	80 91 63 00 	lds	r24, 0x0063
+ 4e6:	82 30       	cpi	r24, 0x02	; 2
+ 4e8:	61 f4       	brne	.+24     	; 0x502 <LEDManager+0x6e>
+ 4ea:	c5 9a       	sbi	0x18, 5	; 24
+ 4ec:	8c eb       	ldi	r24, 0xBC	; 188
+ 4ee:	90 e0       	ldi	r25, 0x00	; 0
+ 4f0:	43 e0       	ldi	r20, 0x03	; 3
+ 4f2:	50 e0       	ldi	r21, 0x00	; 0
+ 4f4:	60 e0       	ldi	r22, 0x00	; 0
+ 4f6:	70 e0       	ldi	r23, 0x00	; 0
+ 4f8:	26 e4       	ldi	r18, 0x46	; 70
+ 4fa:	5f d1       	rcall	.+702    	; 0x7ba <SignalingSystem_AddSignal>
+ 4fc:	8a e0       	ldi	r24, 0x0A	; 10
+ 4fe:	80 93 62 00 	sts	0x0062, r24
+				if(LEDFlag==3){LEDOn;SignalingSystem_AddSignal(&SigSys,3,70);LEDState=20;}
+ 502:	80 91 63 00 	lds	r24, 0x0063
+ 506:	83 30       	cpi	r24, 0x03	; 3
+ 508:	09 f0       	breq	.+2      	; 0x50c <LEDManager+0x78>
+ 50a:	5c c0       	rjmp	.+184    	; 0x5c4 <LEDManager+0x130>
+ 50c:	c5 9a       	sbi	0x18, 5	; 24
+ 50e:	8c eb       	ldi	r24, 0xBC	; 188
+ 510:	90 e0       	ldi	r25, 0x00	; 0
+ 512:	43 e0       	ldi	r20, 0x03	; 3
+ 514:	50 e0       	ldi	r21, 0x00	; 0
+ 516:	60 e0       	ldi	r22, 0x00	; 0
+ 518:	70 e0       	ldi	r23, 0x00	; 0
+ 51a:	26 e4       	ldi	r18, 0x46	; 70
+ 51c:	4e d1       	rcall	.+668    	; 0x7ba <SignalingSystem_AddSignal>
+ 51e:	84 e1       	ldi	r24, 0x14	; 20
+ 520:	80 93 62 00 	sts	0x0062, r24
+ 524:	08 95       	ret
+				break;
+				
+		case 1: if(SignalingSystem_CheckSignal(&SigSys,70)){LEDOff;LEDFlag=0;LEDState=0;}
+ 526:	8c eb       	ldi	r24, 0xBC	; 188
+ 528:	90 e0       	ldi	r25, 0x00	; 0
+ 52a:	66 e4       	ldi	r22, 0x46	; 70
+ 52c:	70 e0       	ldi	r23, 0x00	; 0
+ 52e:	ba d0       	rcall	.+372    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 530:	00 97       	sbiw	r24, 0x00	; 0
+ 532:	09 f4       	brne	.+2      	; 0x536 <LEDManager+0xa2>
+ 534:	47 c0       	rjmp	.+142    	; 0x5c4 <LEDManager+0x130>
+ 536:	c5 98       	cbi	0x18, 5	; 24
+ 538:	10 92 63 00 	sts	0x0063, r1
+ 53c:	10 92 62 00 	sts	0x0062, r1
+ 540:	08 95       	ret
+			break;
+			
+		case 10: if(SignalingSystem_CheckSignal(&SigSys,70)){LEDOff;LEDState=11;SignalingSystem_AddSignal(&SigSys,3,71);}
+ 542:	8c eb       	ldi	r24, 0xBC	; 188
+ 544:	90 e0       	ldi	r25, 0x00	; 0
+ 546:	66 e4       	ldi	r22, 0x46	; 70
+ 548:	70 e0       	ldi	r23, 0x00	; 0
+ 54a:	ac d0       	rcall	.+344    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 54c:	00 97       	sbiw	r24, 0x00	; 0
+ 54e:	d1 f1       	breq	.+116    	; 0x5c4 <LEDManager+0x130>
+ 550:	c5 98       	cbi	0x18, 5	; 24
+ 552:	8b e0       	ldi	r24, 0x0B	; 11
+ 554:	80 93 62 00 	sts	0x0062, r24
+ 558:	8c eb       	ldi	r24, 0xBC	; 188
+ 55a:	90 e0       	ldi	r25, 0x00	; 0
+ 55c:	43 e0       	ldi	r20, 0x03	; 3
+ 55e:	50 e0       	ldi	r21, 0x00	; 0
+ 560:	60 e0       	ldi	r22, 0x00	; 0
+ 562:	70 e0       	ldi	r23, 0x00	; 0
+ 564:	27 e4       	ldi	r18, 0x47	; 71
+ 566:	29 d1       	rcall	.+594    	; 0x7ba <SignalingSystem_AddSignal>
+ 568:	08 95       	ret
+			break;
+			
+		case 11: if(SignalingSystem_CheckSignal(&SigSys,71)){LEDFlag=1;LEDState=0;}
+ 56a:	8c eb       	ldi	r24, 0xBC	; 188
+ 56c:	90 e0       	ldi	r25, 0x00	; 0
+ 56e:	67 e4       	ldi	r22, 0x47	; 71
+ 570:	70 e0       	ldi	r23, 0x00	; 0
+ 572:	98 d0       	rcall	.+304    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 574:	00 97       	sbiw	r24, 0x00	; 0
+ 576:	31 f1       	breq	.+76     	; 0x5c4 <LEDManager+0x130>
+ 578:	81 e0       	ldi	r24, 0x01	; 1
+ 57a:	80 93 63 00 	sts	0x0063, r24
+ 57e:	10 92 62 00 	sts	0x0062, r1
+ 582:	08 95       	ret
+			break;
+			
+		case 20: if(SignalingSystem_CheckSignal(&SigSys,70)){LEDOff;LEDState=21;SignalingSystem_AddSignal(&SigSys,3,71);}
+ 584:	8c eb       	ldi	r24, 0xBC	; 188
+ 586:	90 e0       	ldi	r25, 0x00	; 0
+ 588:	66 e4       	ldi	r22, 0x46	; 70
+ 58a:	70 e0       	ldi	r23, 0x00	; 0
+ 58c:	8b d0       	rcall	.+278    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 58e:	00 97       	sbiw	r24, 0x00	; 0
+ 590:	c9 f0       	breq	.+50     	; 0x5c4 <LEDManager+0x130>
+ 592:	c5 98       	cbi	0x18, 5	; 24
+ 594:	85 e1       	ldi	r24, 0x15	; 21
+ 596:	80 93 62 00 	sts	0x0062, r24
+ 59a:	8c eb       	ldi	r24, 0xBC	; 188
+ 59c:	90 e0       	ldi	r25, 0x00	; 0
+ 59e:	43 e0       	ldi	r20, 0x03	; 3
+ 5a0:	50 e0       	ldi	r21, 0x00	; 0
+ 5a2:	60 e0       	ldi	r22, 0x00	; 0
+ 5a4:	70 e0       	ldi	r23, 0x00	; 0
+ 5a6:	27 e4       	ldi	r18, 0x47	; 71
+ 5a8:	08 d1       	rcall	.+528    	; 0x7ba <SignalingSystem_AddSignal>
+ 5aa:	08 95       	ret
+			break;
+	
+		case 21: if(SignalingSystem_CheckSignal(&SigSys,71)){LEDFlag=2;LEDState=0;}
+ 5ac:	8c eb       	ldi	r24, 0xBC	; 188
+ 5ae:	90 e0       	ldi	r25, 0x00	; 0
+ 5b0:	67 e4       	ldi	r22, 0x47	; 71
+ 5b2:	70 e0       	ldi	r23, 0x00	; 0
+ 5b4:	77 d0       	rcall	.+238    	; 0x6a4 <SignalingSystem_CheckSignal>
+ 5b6:	00 97       	sbiw	r24, 0x00	; 0
+ 5b8:	29 f0       	breq	.+10     	; 0x5c4 <LEDManager+0x130>
+ 5ba:	82 e0       	ldi	r24, 0x02	; 2
+ 5bc:	80 93 63 00 	sts	0x0063, r24
+ 5c0:	10 92 62 00 	sts	0x0062, r1
+ 5c4:	08 95       	ret
+
+000005c6 <main>:
+int main(void)
+{
+	
+	unsigned char i=0,ActionFlag=0;
+
+	DDRD=0b01011000;
+ 5c6:	88 e5       	ldi	r24, 0x58	; 88
+ 5c8:	81 bb       	out	0x11, r24	; 17
+	DDRB=0b00100010;
+ 5ca:	82 e2       	ldi	r24, 0x22	; 34
+ 5cc:	87 bb       	out	0x17, r24	; 23
+	TCCR0|=0b101;
+ 5ce:	83 b7       	in	r24, 0x33	; 51
+ 5d0:	85 60       	ori	r24, 0x05	; 5
+ 5d2:	83 bf       	out	0x33, r24	; 51
+	TIMSK|=(1<<0);
+ 5d4:	89 b7       	in	r24, 0x39	; 57
+ 5d6:	81 60       	ori	r24, 0x01	; 1
+ 5d8:	89 bf       	out	0x39, r24	; 57
+	TCCR2=0b00000100;
+ 5da:	84 e0       	ldi	r24, 0x04	; 4
+ 5dc:	85 bd       	out	0x25, r24	; 37
+	TIMSK|=(1<<6);
+ 5de:	89 b7       	in	r24, 0x39	; 57
+ 5e0:	80 64       	ori	r24, 0x40	; 64
+ 5e2:	89 bf       	out	0x39, r24	; 57
+	
+	sei();
+ 5e4:	78 94       	sei
+	
+	OptoEnOn;
+ 5e6:	c1 9a       	sbi	0x18, 1	; 24
+	LEDOff;
+ 5e8:	c5 98       	cbi	0x18, 5	; 24
+	
+	if(Opto)
+ 5ea:	b2 9b       	sbis	0x16, 2	; 22
+ 5ec:	04 c0       	rjmp	.+8      	; 0x5f6 <main+0x30>
+		LockState=Close;
+ 5ee:	81 e0       	ldi	r24, 0x01	; 1
+ 5f0:	80 93 6d 00 	sts	0x006D, r24
+ 5f4:	02 c0       	rjmp	.+4      	; 0x5fa <main+0x34>
+	else
+		LockState=Open;
+ 5f6:	10 92 6d 00 	sts	0x006D, r1
+	
+	SignalingSystem_Init(&SigSys);
+ 5fa:	8c eb       	ldi	r24, 0xBC	; 188
+ 5fc:	90 e0       	ldi	r25, 0x00	; 0
+ 5fe:	55 d1       	rcall	.+682    	; 0x8aa <SignalingSystem_Init>
+	SignalingSystem_Init(&SigSysData);
+ 600:	82 e7       	ldi	r24, 0x72	; 114
+ 602:	90 e0       	ldi	r25, 0x00	; 0
+ 604:	52 d1       	rcall	.+676    	; 0x8aa <SignalingSystem_Init>
+	
+	LEDFlag=3;
+ 606:	83 e0       	ldi	r24, 0x03	; 3
+ 608:	80 93 63 00 	sts	0x0063, r24
+			LEDOn;
+		else
+			LEDOff;
+		*/
+		
+		SignalingSystem_Task(&SigSys);
+ 60c:	cc eb       	ldi	r28, 0xBC	; 188
+ 60e:	d0 e0       	ldi	r29, 0x00	; 0
+		SignalingSystem_Task(&SigSysData);
+ 610:	02 e7       	ldi	r16, 0x72	; 114
+ 612:	10 e0       	ldi	r17, 0x00	; 0
+		}
+		
+		
+		if((LockOpenTempFlag==1)&&(!Reed2))
+		{
+			LockOpenFlag=1;LockOpenTempFlag=0;
+ 614:	ff 24       	eor	r15, r15
+ 616:	f3 94       	inc	r15
+			LEDOn;
+		else
+			LEDOff;
+		*/
+		
+		SignalingSystem_Task(&SigSys);
+ 618:	ce 01       	movw	r24, r28
+ 61a:	6f d0       	rcall	.+222    	; 0x6fa <SignalingSystem_Task>
+		SignalingSystem_Task(&SigSysData);
+ 61c:	c8 01       	movw	r24, r16
+ 61e:	6d d0       	rcall	.+218    	; 0x6fa <SignalingSystem_Task>
+		
+		MotorManager();
+ 620:	1e dd       	rcall	.-1476   	; 0x5e <MotorManager>
+		Send_Task();
+ 622:	cb dd       	rcall	.-1130   	; 0x1ba <Send_Task>
+		Receive_Task();
+ 624:	4c de       	rcall	.-872    	; 0x2be <Receive_Task>
+		InterfaceManager();
+ 626:	ed de       	rcall	.-550    	; 0x402 <InterfaceManager>
+		LEDManager();
+ 628:	35 df       	rcall	.-406    	; 0x494 <LEDManager>
+		
+		if(Flag100ms==1)
+ 62a:	80 91 6a 00 	lds	r24, 0x006A
+ 62e:	81 30       	cpi	r24, 0x01	; 1
+ 630:	21 f4       	brne	.+8      	; 0x63a <main+0x74>
+		{
+			//LEDPort^=(1<<LEDPin);
+			SignalingSystem_SystemEPOCH(&SigSys);
+ 632:	ce 01       	movw	r24, r28
+ 634:	9f d0       	rcall	.+318    	; 0x774 <SignalingSystem_SystemEPOCH>
+			Flag100ms=0;
+ 636:	10 92 6a 00 	sts	0x006A, r1
+		}
+		
+		if(Flag10ms==1)
+ 63a:	80 91 69 00 	lds	r24, 0x0069
+ 63e:	81 30       	cpi	r24, 0x01	; 1
+ 640:	21 f4       	brne	.+8      	; 0x64a <main+0x84>
+		{
+			SignalingSystem_SystemEPOCH(&SigSysData);
+ 642:	c8 01       	movw	r24, r16
+ 644:	97 d0       	rcall	.+302    	; 0x774 <SignalingSystem_SystemEPOCH>
+			Flag10ms=0;
+ 646:	10 92 69 00 	sts	0x0069, r1
+		}
+		
+		
+		if((LockOpenTempFlag==1)&&(!Reed2))
+ 64a:	80 91 6b 00 	lds	r24, 0x006B
+ 64e:	81 30       	cpi	r24, 0x01	; 1
+ 650:	19 f7       	brne	.-58     	; 0x618 <main+0x52>
+ 652:	b0 99       	sbic	0x16, 0	; 22
+ 654:	e1 cf       	rjmp	.-62     	; 0x618 <main+0x52>
+		{
+			LockOpenFlag=1;LockOpenTempFlag=0;
+ 656:	f0 92 6f 00 	sts	0x006F, r15
+ 65a:	10 92 6b 00 	sts	0x006B, r1
+ 65e:	dc cf       	rjmp	.-72     	; 0x618 <main+0x52>
+
+00000660 <__vector_9>:
+
+
+
+
+ISR(TIMER0_OVF_vect)
+{
+ 660:	1f 92       	push	r1
+ 662:	0f 92       	push	r0
+ 664:	0f b6       	in	r0, 0x3f	; 63
+ 666:	0f 92       	push	r0
+ 668:	11 24       	eor	r1, r1
+ 66a:	8f 93       	push	r24
+	TCNT0=159;
+ 66c:	8f e9       	ldi	r24, 0x9F	; 159
+ 66e:	82 bf       	out	0x32, r24	; 50
+	Flag100ms=1;
+ 670:	81 e0       	ldi	r24, 0x01	; 1
+ 672:	80 93 6a 00 	sts	0x006A, r24
+}
+ 676:	8f 91       	pop	r24
+ 678:	0f 90       	pop	r0
+ 67a:	0f be       	out	0x3f, r0	; 63
+ 67c:	0f 90       	pop	r0
+ 67e:	1f 90       	pop	r1
+ 680:	18 95       	reti
+
+00000682 <__vector_4>:
+
+
+ISR(TIMER2_OVF_vect)
+{
+ 682:	1f 92       	push	r1
+ 684:	0f 92       	push	r0
+ 686:	0f b6       	in	r0, 0x3f	; 63
+ 688:	0f 92       	push	r0
+ 68a:	11 24       	eor	r1, r1
+ 68c:	8f 93       	push	r24
+	TCNT2=99;
+ 68e:	83 e6       	ldi	r24, 0x63	; 99
+ 690:	84 bd       	out	0x24, r24	; 36
+	Flag10ms=1;
+ 692:	81 e0       	ldi	r24, 0x01	; 1
+ 694:	80 93 69 00 	sts	0x0069, r24
+ 698:	8f 91       	pop	r24
+ 69a:	0f 90       	pop	r0
+ 69c:	0f be       	out	0x3f, r0	; 63
+ 69e:	0f 90       	pop	r0
+ 6a0:	1f 90       	pop	r1
+ 6a2:	18 95       	reti
+
+000006a4 <SignalingSystem_CheckSignal>:
+#include "Signaling.h"
+
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+{
+ 6a4:	cf 93       	push	r28
+ 6a6:	df 93       	push	r29
+ 6a8:	ec 01       	movw	r28, r24
+#include "Signaling.h"
+
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+ 6aa:	dc 01       	movw	r26, r24
+ 6ac:	16 96       	adiw	r26, 0x06	; 6
+ 6ae:	80 e0       	ldi	r24, 0x00	; 0
+ 6b0:	90 e0       	ldi	r25, 0x00	; 0
+{
+	char i=0,result=0;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Fired==1)&&(sys->SignalQueue[i].SignalCode==sigcode))
+ 6b2:	ac 01       	movw	r20, r24
+#include "Signaling.h"
+
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+ 6b4:	fd 01       	movw	r30, r26
+ 6b6:	31 97       	sbiw	r30, 0x01	; 1
+{
+	char i=0,result=0;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Fired==1)&&(sys->SignalQueue[i].SignalCode==sigcode))
+ 6b8:	70 81       	ld	r23, Z
+ 6ba:	77 23       	and	r23, r23
+ 6bc:	a9 f4       	brne	.+42     	; 0x6e8 <SignalingSystem_CheckSignal+0x44>
+ 6be:	7c 91       	ld	r23, X
+ 6c0:	71 30       	cpi	r23, 0x01	; 1
+ 6c2:	91 f4       	brne	.+36     	; 0x6e8 <SignalingSystem_CheckSignal+0x44>
+#include "Signaling.h"
+
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+ 6c4:	fd 01       	movw	r30, r26
+ 6c6:	36 97       	sbiw	r30, 0x06	; 6
+{
+	char i=0,result=0;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Fired==1)&&(sys->SignalQueue[i].SignalCode==sigcode))
+ 6c8:	20 81       	ld	r18, Z
+ 6ca:	26 17       	cp	r18, r22
+ 6cc:	69 f4       	brne	.+26     	; 0x6e8 <SignalingSystem_CheckSignal+0x44>
+	{sys->SignalQueue[i].Expired=1;result=1;break;}
+ 6ce:	88 0f       	add	r24, r24
+ 6d0:	99 1f       	adc	r25, r25
+ 6d2:	88 0f       	add	r24, r24
+ 6d4:	99 1f       	adc	r25, r25
+ 6d6:	88 0f       	add	r24, r24
+ 6d8:	99 1f       	adc	r25, r25
+ 6da:	84 1b       	sub	r24, r20
+ 6dc:	95 0b       	sbc	r25, r21
+ 6de:	c8 0f       	add	r28, r24
+ 6e0:	d9 1f       	adc	r29, r25
+ 6e2:	81 e0       	ldi	r24, 0x01	; 1
+ 6e4:	8d 83       	std	Y+5, r24	; 0x05
+ 6e6:	06 c0       	rjmp	.+12     	; 0x6f4 <SignalingSystem_CheckSignal+0x50>
+ 6e8:	01 96       	adiw	r24, 0x01	; 1
+ 6ea:	17 96       	adiw	r26, 0x07	; 7
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+{
+	char i=0,result=0;
+	for(i=0;i<SignalQueueElements;i++)
+ 6ec:	8a 30       	cpi	r24, 0x0A	; 10
+ 6ee:	91 05       	cpc	r25, r1
+ 6f0:	01 f7       	brne	.-64     	; 0x6b2 <SignalingSystem_CheckSignal+0xe>
+
+
+
+char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
+{
+	char i=0,result=0;
+ 6f2:	80 e0       	ldi	r24, 0x00	; 0
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Fired==1)&&(sys->SignalQueue[i].SignalCode==sigcode))
+	{sys->SignalQueue[i].Expired=1;result=1;break;}
+	return result;
+}
+ 6f4:	df 91       	pop	r29
+ 6f6:	cf 91       	pop	r28
+ 6f8:	08 95       	ret
+
+000006fa <SignalingSystem_Task>:
+
+
+
+
+void SignalingSystem_Task(SignalingSystem *sys)
+{
+ 6fa:	df 92       	push	r13
+ 6fc:	ef 92       	push	r14
+ 6fe:	ff 92       	push	r15
+ 700:	0f 93       	push	r16
+ 702:	1f 93       	push	r17
+ 704:	cf 93       	push	r28
+ 706:	df 93       	push	r29
+}
+
+
+
+
+void SignalingSystem_Task(SignalingSystem *sys)
+ 708:	9c 01       	movw	r18, r24
+ 70a:	2a 5f       	subi	r18, 0xFA	; 250
+ 70c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 70e:	8c 01       	movw	r16, r24
+ 710:	04 5b       	subi	r16, 0xB4	; 180
+ 712:	1f 4f       	sbci	r17, 0xFF	; 255
+{
+  char i=0;
+  for(i=0;i<SignalQueueElements;i++)
+   if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Time==sys->SystemEPOCH)&&(sys->SignalQueue[i].Fired==0))
+ 714:	0f 2e       	mov	r0, r31
+ 716:	f6 e4       	ldi	r31, 0x46	; 70
+ 718:	ef 2e       	mov	r14, r31
+ 71a:	ff 24       	eor	r15, r15
+ 71c:	f0 2d       	mov	r31, r0
+ 71e:	e8 0e       	add	r14, r24
+ 720:	f9 1e       	adc	r15, r25
+    sys->SignalQueue[i].Fired=1;
+ 722:	dd 24       	eor	r13, r13
+ 724:	d3 94       	inc	r13
+}
+
+
+
+
+void SignalingSystem_Task(SignalingSystem *sys)
+ 726:	e9 01       	movw	r28, r18
+ 728:	f9 01       	movw	r30, r18
+ 72a:	31 97       	sbiw	r30, 0x01	; 1
+{
+  char i=0;
+  for(i=0;i<SignalQueueElements;i++)
+   if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Time==sys->SystemEPOCH)&&(sys->SignalQueue[i].Fired==0))
+ 72c:	80 81       	ld	r24, Z
+ 72e:	88 23       	and	r24, r24
+ 730:	a1 f4       	brne	.+40     	; 0x75a <SignalingSystem_Task+0x60>
+}
+
+
+
+
+void SignalingSystem_Task(SignalingSystem *sys)
+ 732:	f9 01       	movw	r30, r18
+ 734:	35 97       	sbiw	r30, 0x05	; 5
+{
+  char i=0;
+  for(i=0;i<SignalQueueElements;i++)
+   if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Time==sys->SystemEPOCH)&&(sys->SignalQueue[i].Fired==0))
+ 736:	80 81       	ld	r24, Z
+ 738:	91 81       	ldd	r25, Z+1	; 0x01
+ 73a:	a2 81       	ldd	r26, Z+2	; 0x02
+ 73c:	b3 81       	ldd	r27, Z+3	; 0x03
+ 73e:	f7 01       	movw	r30, r14
+ 740:	40 81       	ld	r20, Z
+ 742:	51 81       	ldd	r21, Z+1	; 0x01
+ 744:	62 81       	ldd	r22, Z+2	; 0x02
+ 746:	73 81       	ldd	r23, Z+3	; 0x03
+ 748:	84 17       	cp	r24, r20
+ 74a:	95 07       	cpc	r25, r21
+ 74c:	a6 07       	cpc	r26, r22
+ 74e:	b7 07       	cpc	r27, r23
+ 750:	21 f4       	brne	.+8      	; 0x75a <SignalingSystem_Task+0x60>
+ 752:	88 81       	ld	r24, Y
+ 754:	88 23       	and	r24, r24
+ 756:	09 f4       	brne	.+2      	; 0x75a <SignalingSystem_Task+0x60>
+    sys->SignalQueue[i].Fired=1;
+ 758:	d8 82       	st	Y, r13
+ 75a:	29 5f       	subi	r18, 0xF9	; 249
+ 75c:	3f 4f       	sbci	r19, 0xFF	; 255
+
+
+void SignalingSystem_Task(SignalingSystem *sys)
+{
+  char i=0;
+  for(i=0;i<SignalQueueElements;i++)
+ 75e:	20 17       	cp	r18, r16
+ 760:	31 07       	cpc	r19, r17
+ 762:	09 f7       	brne	.-62     	; 0x726 <SignalingSystem_Task+0x2c>
+   if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Time==sys->SystemEPOCH)&&(sys->SignalQueue[i].Fired==0))
+    sys->SignalQueue[i].Fired=1;
+}
+ 764:	df 91       	pop	r29
+ 766:	cf 91       	pop	r28
+ 768:	1f 91       	pop	r17
+ 76a:	0f 91       	pop	r16
+ 76c:	ff 90       	pop	r15
+ 76e:	ef 90       	pop	r14
+ 770:	df 90       	pop	r13
+ 772:	08 95       	ret
+
+00000774 <SignalingSystem_SystemEPOCH>:
+
+
+
+void SignalingSystem_SystemEPOCH(SignalingSystem *sys)
+{
+  if(sys->SystemEPOCH!=0xFFFFFFFF)
+ 774:	fc 01       	movw	r30, r24
+ 776:	ea 5b       	subi	r30, 0xBA	; 186
+ 778:	ff 4f       	sbci	r31, 0xFF	; 255
+ 77a:	40 81       	ld	r20, Z
+ 77c:	51 81       	ldd	r21, Z+1	; 0x01
+ 77e:	62 81       	ldd	r22, Z+2	; 0x02
+ 780:	73 81       	ldd	r23, Z+3	; 0x03
+ 782:	4f 3f       	cpi	r20, 0xFF	; 255
+ 784:	2f ef       	ldi	r18, 0xFF	; 255
+ 786:	52 07       	cpc	r21, r18
+ 788:	2f ef       	ldi	r18, 0xFF	; 255
+ 78a:	62 07       	cpc	r22, r18
+ 78c:	2f ef       	ldi	r18, 0xFF	; 255
+ 78e:	72 07       	cpc	r23, r18
+ 790:	61 f0       	breq	.+24     	; 0x7aa <SignalingSystem_SystemEPOCH+0x36>
+    sys->SystemEPOCH=(sys->SystemEPOCH)+1;
+ 792:	fc 01       	movw	r30, r24
+ 794:	ea 5b       	subi	r30, 0xBA	; 186
+ 796:	ff 4f       	sbci	r31, 0xFF	; 255
+ 798:	4f 5f       	subi	r20, 0xFF	; 255
+ 79a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 79c:	6f 4f       	sbci	r22, 0xFF	; 255
+ 79e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 7a0:	40 83       	st	Z, r20
+ 7a2:	51 83       	std	Z+1, r21	; 0x01
+ 7a4:	62 83       	std	Z+2, r22	; 0x02
+ 7a6:	73 83       	std	Z+3, r23	; 0x03
+ 7a8:	08 95       	ret
+  else
+    sys->SystemEPOCH=0;
+ 7aa:	fc 01       	movw	r30, r24
+ 7ac:	ea 5b       	subi	r30, 0xBA	; 186
+ 7ae:	ff 4f       	sbci	r31, 0xFF	; 255
+ 7b0:	10 82       	st	Z, r1
+ 7b2:	11 82       	std	Z+1, r1	; 0x01
+ 7b4:	12 82       	std	Z+2, r1	; 0x02
+ 7b6:	13 82       	std	Z+3, r1	; 0x03
+ 7b8:	08 95       	ret
+
+000007ba <SignalingSystem_AddSignal>:
+}
+
+
+
+void SignalingSystem_AddSignal(SignalingSystem *sys,unsigned long sigtime,char sigcode)
+{
+ 7ba:	8f 92       	push	r8
+ 7bc:	9f 92       	push	r9
+ 7be:	af 92       	push	r10
+ 7c0:	bf 92       	push	r11
+ 7c2:	cf 92       	push	r12
+ 7c4:	df 92       	push	r13
+ 7c6:	ef 92       	push	r14
+ 7c8:	ff 92       	push	r15
+ 7ca:	dc 01       	movw	r26, r24
+ 7cc:	6a 01       	movw	r12, r20
+ 7ce:	7b 01       	movw	r14, r22
+  unsigned long signaltime=0;
+  char i;
+  signaltime=sys->SystemEPOCH+sigtime;
+ 7d0:	fc 01       	movw	r30, r24
+ 7d2:	ea 5b       	subi	r30, 0xBA	; 186
+ 7d4:	ff 4f       	sbci	r31, 0xFF	; 255
+ 7d6:	80 80       	ld	r8, Z
+ 7d8:	91 80       	ldd	r9, Z+1	; 0x01
+ 7da:	a2 80       	ldd	r10, Z+2	; 0x02
+ 7dc:	b3 80       	ldd	r11, Z+3	; 0x03
+
+  for(i=0;i<SignalQueueElements;i++)
+   if(sys->SignalQueue[i].Expired==1)
+ 7de:	15 96       	adiw	r26, 0x05	; 5
+ 7e0:	8c 91       	ld	r24, X
+ 7e2:	15 97       	sbiw	r26, 0x05	; 5
+ 7e4:	81 30       	cpi	r24, 0x01	; 1
+ 7e6:	49 f0       	breq	.+18     	; 0x7fa <SignalingSystem_AddSignal+0x40>
+    sys->SystemEPOCH=0;
+}
+
+
+
+void SignalingSystem_AddSignal(SignalingSystem *sys,unsigned long sigtime,char sigcode)
+ 7e8:	fd 01       	movw	r30, r26
+ 7ea:	3c 96       	adiw	r30, 0x0c	; 12
+ 7ec:	81 e0       	ldi	r24, 0x01	; 1
+ 7ee:	90 e0       	ldi	r25, 0x00	; 0
+  unsigned long signaltime=0;
+  char i;
+  signaltime=sys->SystemEPOCH+sigtime;
+
+  for(i=0;i<SignalQueueElements;i++)
+   if(sys->SignalQueue[i].Expired==1)
+ 7f0:	ac 01       	movw	r20, r24
+ 7f2:	30 81       	ld	r19, Z
+ 7f4:	31 30       	cpi	r19, 0x01	; 1
+ 7f6:	01 f5       	brne	.+64     	; 0x838 <SignalingSystem_AddSignal+0x7e>
+ 7f8:	02 c0       	rjmp	.+4      	; 0x7fe <SignalingSystem_AddSignal+0x44>
+ 7fa:	40 e0       	ldi	r20, 0x00	; 0
+ 7fc:	50 e0       	ldi	r21, 0x00	; 0
+   {
+    sys->SignalQueue[i].SignalCode=sigcode;
+ 7fe:	ca 01       	movw	r24, r20
+ 800:	88 0f       	add	r24, r24
+ 802:	99 1f       	adc	r25, r25
+ 804:	88 0f       	add	r24, r24
+ 806:	99 1f       	adc	r25, r25
+ 808:	88 0f       	add	r24, r24
+ 80a:	99 1f       	adc	r25, r25
+ 80c:	84 1b       	sub	r24, r20
+ 80e:	95 0b       	sbc	r25, r21
+ 810:	a8 0f       	add	r26, r24
+ 812:	b9 1f       	adc	r27, r25
+ 814:	2c 93       	st	X, r18
+
+void SignalingSystem_AddSignal(SignalingSystem *sys,unsigned long sigtime,char sigcode)
+{
+  unsigned long signaltime=0;
+  char i;
+  signaltime=sys->SystemEPOCH+sigtime;
+ 816:	c8 0c       	add	r12, r8
+ 818:	d9 1c       	adc	r13, r9
+ 81a:	ea 1c       	adc	r14, r10
+ 81c:	fb 1c       	adc	r15, r11
+
+  for(i=0;i<SignalQueueElements;i++)
+   if(sys->SignalQueue[i].Expired==1)
+   {
+    sys->SignalQueue[i].SignalCode=sigcode;
+    sys->SignalQueue[i].Time=signaltime;
+ 81e:	11 96       	adiw	r26, 0x01	; 1
+ 820:	cd 92       	st	X+, r12
+ 822:	dd 92       	st	X+, r13
+ 824:	ed 92       	st	X+, r14
+ 826:	fc 92       	st	X, r15
+ 828:	14 97       	sbiw	r26, 0x04	; 4
+    sys->SignalQueue[i].Expired=0;
+ 82a:	15 96       	adiw	r26, 0x05	; 5
+ 82c:	1c 92       	st	X, r1
+ 82e:	15 97       	sbiw	r26, 0x05	; 5
+    sys->SignalQueue[i].Fired=0;
+ 830:	16 96       	adiw	r26, 0x06	; 6
+ 832:	1c 92       	st	X, r1
+ 834:	16 97       	sbiw	r26, 0x06	; 6
+    break;
+ 836:	05 c0       	rjmp	.+10     	; 0x842 <SignalingSystem_AddSignal+0x88>
+ 838:	01 96       	adiw	r24, 0x01	; 1
+ 83a:	37 96       	adiw	r30, 0x07	; 7
+{
+  unsigned long signaltime=0;
+  char i;
+  signaltime=sys->SystemEPOCH+sigtime;
+
+  for(i=0;i<SignalQueueElements;i++)
+ 83c:	8a 30       	cpi	r24, 0x0A	; 10
+ 83e:	91 05       	cpc	r25, r1
+ 840:	b9 f6       	brne	.-82     	; 0x7f0 <SignalingSystem_AddSignal+0x36>
+    sys->SignalQueue[i].Time=signaltime;
+    sys->SignalQueue[i].Expired=0;
+    sys->SignalQueue[i].Fired=0;
+    break;
+   }
+}
+ 842:	ff 90       	pop	r15
+ 844:	ef 90       	pop	r14
+ 846:	df 90       	pop	r13
+ 848:	cf 90       	pop	r12
+ 84a:	bf 90       	pop	r11
+ 84c:	af 90       	pop	r10
+ 84e:	9f 90       	pop	r9
+ 850:	8f 90       	pop	r8
+ 852:	08 95       	ret
+
+00000854 <SignalingSystem_ClearAllSignals>:
+
+
+
+
+void SignalingSystem_ClearAllSignals(SignalingSystem *sys,char sigcode)
+{
+ 854:	cf 93       	push	r28
+ 856:	df 93       	push	r29
+
+
+
+
+
+void SignalingSystem_ClearAllSignals(SignalingSystem *sys,char sigcode)
+ 858:	fc 01       	movw	r30, r24
+ 85a:	35 96       	adiw	r30, 0x05	; 5
+ 85c:	8a e0       	ldi	r24, 0x0A	; 10
+{
+char i;
+  for(i=0;i<SignalQueueElements;i++)
+    if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode!=sigcode))
+      sys->SignalQueue[i].Expired=1;
+ 85e:	21 e0       	ldi	r18, 0x01	; 1
+
+void SignalingSystem_ClearAllSignals(SignalingSystem *sys,char sigcode)
+{
+char i;
+  for(i=0;i<SignalQueueElements;i++)
+    if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode!=sigcode))
+ 860:	90 81       	ld	r25, Z
+ 862:	99 23       	and	r25, r25
+ 864:	29 f4       	brne	.+10     	; 0x870 <SignalingSystem_ClearAllSignals+0x1c>
+
+
+
+
+
+void SignalingSystem_ClearAllSignals(SignalingSystem *sys,char sigcode)
+ 866:	ef 01       	movw	r28, r30
+ 868:	25 97       	sbiw	r28, 0x05	; 5
+{
+char i;
+  for(i=0;i<SignalQueueElements;i++)
+    if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode!=sigcode))
+ 86a:	98 81       	ld	r25, Y
+ 86c:	96 13       	cpse	r25, r22
+      sys->SignalQueue[i].Expired=1;
+ 86e:	20 83       	st	Z, r18
+ 870:	81 50       	subi	r24, 0x01	; 1
+ 872:	37 96       	adiw	r30, 0x07	; 7
+
+
+void SignalingSystem_ClearAllSignals(SignalingSystem *sys,char sigcode)
+{
+char i;
+  for(i=0;i<SignalQueueElements;i++)
+ 874:	88 23       	and	r24, r24
+ 876:	a1 f7       	brne	.-24     	; 0x860 <SignalingSystem_ClearAllSignals+0xc>
+    if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode!=sigcode))
+      sys->SignalQueue[i].Expired=1;
+}
+ 878:	df 91       	pop	r29
+ 87a:	cf 91       	pop	r28
+ 87c:	08 95       	ret
+
+0000087e <SignalingSystem_ClearSignal>:
+
+
+
+
+void SignalingSystem_ClearSignal(SignalingSystem *sys,char sigcode)
+{
+ 87e:	cf 93       	push	r28
+ 880:	df 93       	push	r29
+}
+
+
+
+
+void SignalingSystem_ClearSignal(SignalingSystem *sys,char sigcode)
+ 882:	fc 01       	movw	r30, r24
+ 884:	35 96       	adiw	r30, 0x05	; 5
+ 886:	8a e0       	ldi	r24, 0x0A	; 10
+{
+	char i;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode==sigcode))
+	sys->SignalQueue[i].Expired=1;
+ 888:	21 e0       	ldi	r18, 0x01	; 1
+
+void SignalingSystem_ClearSignal(SignalingSystem *sys,char sigcode)
+{
+	char i;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode==sigcode))
+ 88a:	90 81       	ld	r25, Z
+ 88c:	99 23       	and	r25, r25
+ 88e:	31 f4       	brne	.+12     	; 0x89c <SignalingSystem_ClearSignal+0x1e>
+}
+
+
+
+
+void SignalingSystem_ClearSignal(SignalingSystem *sys,char sigcode)
+ 890:	ef 01       	movw	r28, r30
+ 892:	25 97       	sbiw	r28, 0x05	; 5
+{
+	char i;
+	for(i=0;i<SignalQueueElements;i++)
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode==sigcode))
+ 894:	98 81       	ld	r25, Y
+ 896:	96 17       	cp	r25, r22
+ 898:	09 f4       	brne	.+2      	; 0x89c <SignalingSystem_ClearSignal+0x1e>
+	sys->SignalQueue[i].Expired=1;
+ 89a:	20 83       	st	Z, r18
+ 89c:	81 50       	subi	r24, 0x01	; 1
+ 89e:	37 96       	adiw	r30, 0x07	; 7
+
+
+void SignalingSystem_ClearSignal(SignalingSystem *sys,char sigcode)
+{
+	char i;
+	for(i=0;i<SignalQueueElements;i++)
+ 8a0:	88 23       	and	r24, r24
+ 8a2:	99 f7       	brne	.-26     	; 0x88a <SignalingSystem_ClearSignal+0xc>
+	if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode==sigcode))
+	sys->SignalQueue[i].Expired=1;
+}
+ 8a4:	df 91       	pop	r29
+ 8a6:	cf 91       	pop	r28
+ 8a8:	08 95       	ret
+
+000008aa <SignalingSystem_Init>:
+
+
+void SignalingSystem_Init(SignalingSystem *sys)
+{
+   char i;
+   for(i=0;i<SignalQueueElements;i++)
+ 8aa:	fc 01       	movw	r30, r24
+ 8ac:	20 e0       	ldi	r18, 0x00	; 0
+   {
+    sys->SignalQueue[i].SignalCode=0;
+    sys->SignalQueue[i].Time=0;
+    sys->SignalQueue[i].Expired=1;
+ 8ae:	31 e0       	ldi	r19, 0x01	; 1
+void SignalingSystem_Init(SignalingSystem *sys)
+{
+   char i;
+   for(i=0;i<SignalQueueElements;i++)
+   {
+    sys->SignalQueue[i].SignalCode=0;
+ 8b0:	10 82       	st	Z, r1
+    sys->SignalQueue[i].Time=0;
+ 8b2:	11 82       	std	Z+1, r1	; 0x01
+ 8b4:	12 82       	std	Z+2, r1	; 0x02
+ 8b6:	13 82       	std	Z+3, r1	; 0x03
+ 8b8:	14 82       	std	Z+4, r1	; 0x04
+    sys->SignalQueue[i].Expired=1;
+ 8ba:	35 83       	std	Z+5, r19	; 0x05
+    sys->SignalQueue[i].Fired=0;
+ 8bc:	16 82       	std	Z+6, r1	; 0x06
+
+
+void SignalingSystem_Init(SignalingSystem *sys)
+{
+   char i;
+   for(i=0;i<SignalQueueElements;i++)
+ 8be:	2f 5f       	subi	r18, 0xFF	; 255
+ 8c0:	37 96       	adiw	r30, 0x07	; 7
+ 8c2:	2a 30       	cpi	r18, 0x0A	; 10
+ 8c4:	a9 f7       	brne	.-22     	; 0x8b0 <SignalingSystem_Init+0x6>
+    sys->SignalQueue[i].Time=0;
+    sys->SignalQueue[i].Expired=1;
+    sys->SignalQueue[i].Fired=0;
+   }
+
+   sys->SystemEPOCH=0;
+ 8c6:	8a 5b       	subi	r24, 0xBA	; 186
+ 8c8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 8ca:	fc 01       	movw	r30, r24
+ 8cc:	10 82       	st	Z, r1
+ 8ce:	11 82       	std	Z+1, r1	; 0x01
+ 8d0:	12 82       	std	Z+2, r1	; 0x02
+ 8d2:	13 82       	std	Z+3, r1	; 0x03
+ 8d4:	08 95       	ret
+
+000008d6 <_exit>:
+ 8d6:	f8 94       	cli
+
+000008d8 <__stop_program>:
+ 8d8:	ff cf       	rjmp	.-2      	; 0x8d8 <__stop_program>
